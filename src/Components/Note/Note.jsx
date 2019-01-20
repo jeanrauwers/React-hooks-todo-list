@@ -6,10 +6,10 @@ const Note = props => {
 	return (
 		<div
 			className="listItem"
-			key={item.key}
+			key={item ? item : ''}
 			onClick={() => props.delete(item)}
 		>
-			{item.value === '' ? '' : item}
+			{item ? item : ''}
 		</div>
 	);
 };

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import Note from './Note';
+import Note from '../Note/Note';
+
 class App extends Component {
 	constructor(props) {
 		super(props);
@@ -9,6 +10,8 @@ class App extends Component {
 			notes: []
 		};
 		this.delete = this.delete.bind(this);
+		this.handleKeyPress = this.handleKeyPress.bind(this);
+		this.addNote = this.addNote.bind(this);
 	}
 	updateNoteText(noteText) {
 		this.setState({ inputValue: noteText.target.value });
@@ -16,11 +19,12 @@ class App extends Component {
 
 	handleKeyPress(e) {
 		if (e.key === 'Enter') {
+			this.addNote()
 		}
 	}
 
 	addNote() {
-		if (this.state.value === '' || this.state.value === ' ') {
+		if (this.state.inputValue === '' || this.state.inputValue === ' ') {
 			return 0;
 		}
 
@@ -39,7 +43,7 @@ class App extends Component {
 	createTasks(item) {
 		return (
 			<div className="note" key={item}>
-				{item.value === '' ? '' : item}
+				{item ? item : ''}
 			</div>
 		);
 	}
@@ -50,8 +54,8 @@ class App extends Component {
 
 		return (
 			<div className="container">
-				<div className="header">TODO App</div>
-				<div className="btn" onClick={this.addNote.bind(this)}>
+				<div className="header">React - TODO List Demo</div>
+				<div className="btn" onClick={this.addNote}>
 					+
 				</div>
 				<input
@@ -60,7 +64,7 @@ class App extends Component {
 					ref={input => (this.textinput = input)}
 					value={this.state.inputValue}
 					onChange={noteText => this.updateNoteText(noteText)}
-					onKeyPress={this.handleKeyPress.bind(this)}
+					onKeyPress={this.handleKeyPress}
 				/>
 				<Note item={notes} delete={this.delete} state={this.state.notes} />
 			</div>
