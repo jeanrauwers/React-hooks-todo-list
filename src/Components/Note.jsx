@@ -1,15 +1,15 @@
 import React  from 'react';
 
 const Note = props => {
-	const item = props.item;
+	const {item, ...restProps} = props
 
 	return (
 		<div
+		{...restProps}
 			className="listItem"
-			key={item ? item : ''}
-			onClick={() => props.delete(item)}
+			
 		>
-			{item ? item : ''}
+			{item || ''}
 		</div>
 	);
 };
