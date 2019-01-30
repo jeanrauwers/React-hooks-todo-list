@@ -1,12 +1,12 @@
 import React  from 'react';
-
+import '../CSS/..'
 const Note = props => {
 	const {item, ...restProps} = props
 
 	return (
-		<div
+		<div 
 		{...restProps}
-			className="listItem"
+			className="note"
 			
 		>
 			{item || ''}
