@@ -1,3 +1,6 @@
+@import './vars';
+
+
 * {
   margin: 0px;
   box-sizing: border-box;
@@ -7,7 +10,7 @@ html, body {
   height: 100%;
 }
 body {
-  background: #f1f1f1;
+  background: $background;
 }
 #root {
   width: 100%;
@@ -20,13 +23,13 @@ body {
   font-size: 22px;
   font-weight: bold;
   font-style: italic;
-  color: #f1f1f1;
-  background: #7fba23;
+  color: $background;
+  background: $header;
   padding: 40px;
 }
 .note {
   font-weight: bold;
-  color: #0074cc;
+  color: $blue;
   padding: 40px;
   margin: 20px;
   background: #fff;
@@ -52,8 +55,8 @@ body {
   line-height: 80px;
   font-size: 28px;
   font-weight: bold;
-  color: #f1f1f1;
-  background: #0074cc;
+  color: $background;
+  background: $blue;
   cursor: pointer;
   box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.8);
   -webkit-box-shadow: 0px 0px 11px 0px rgba(0,0,0,0.8);
@@ -72,7 +75,7 @@ body {
   padding: 0 20px;
   border: none;
   outline: none;
-  background: #7fba23;
+  background: $header;
   font-size: 16px;
-  color: #f1f1f1;
+  color: $background;
 }
