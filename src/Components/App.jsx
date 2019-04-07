@@ -1,70 +1,62 @@
-import React from 'react';
+import React, { useState, useEffect, useRef}from 'react';
 import '../SCSS/App.scss';
 import Note from './Note';
 
-class App extends React.Component {
-	constructor(props) {
-		super(props);
+const App = () => {
+	const [isEditing, setEditing] = useState(false);
+	const inputRef = useRef();
+	const [inputValue, setInputValue] = useState('');
+	const [notes, setNotes]= useState([]);
 
-		this.state = {
-			inputValue: '',
-			notes: []
-		};
-
-		this.deleteTask = this.deleteTask.bind(this);
-		this.handleKeyPress = this.handleKeyPress.bind(this);
-		this.addTask = this.addTask.bind(this);
-		this.updateNoteText = this.updateNoteText.bind(this);
-		this.inputRef = React.createRef();
-
+	useEffect(() => {
+		  inputRef.current.focus();
+	  }, [isEditing]);
+	
+	const updateNoteText = (event) => {
+		setInputValue(event.target.value);
 	}
 
-	updateNoteText(event) {
-		this.setState({ inputValue: event.target.value });
-	}
-
-	handleKeyPress(e) {
+	const handleKeyPress = (e) =>{
 		if (e.key === 'Enter') {
-			this.addTask()
+			addTask()
 		}
 	}
 
-	addTask() {
-		if (!this.state.inputValue.replace(/\s/,'').length) {
+	const addTask = () => {
+		if (!inputValue.replace(/\s/,'').length) {
 			return;
 		}
 		
+		const newNotesArray = [...notes, inputValue];
+		setNotes(newNotesArray);
+		setInputValue('');
 		
-		this.setState( state => ({notes:[...state.notes, state.inputValue], inputValue:''}))
-		this.inputRef.current.focus();
 	}
 
-	deleteTask(index) {
-		const notesArray = [...this.state.notes];
+	const deleteTask = (index) => {
+		const notesArray = [...notes];
 		notesArray.splice(index, 1);
-		this.setState({ notes: notesArray });
+		setNotes(notesArray);
 	}
-
-	render() {
 
 		return (
 			<div className="container">
 				<div className="header">React - TODO List Demo</div>
-				<div className="btn" onClick={this.addTask}>
+				<div className="btn" onClick={addTask}>
 					+
 				</div>
 				<input
+					ref={inputRef}
 					type="text"
 					className="textInput"
-					ref={this.inputRef}
-					value={this.state.inputValue}
-					onChange={this.updateNoteText}
-					onKeyPress={this.handleKeyPress}
+					value={inputValue}
+					onChange={updateNoteText}
+					onKeyPress={handleKeyPress}
 				/>
-				{this.state.notes.map((item, index) => <Note item={item} onClick={() => this.deleteTask(index)} key={`task${index}`}/>)}
+				{notes.map((item, index) => <Note item={item} onClick={() => deleteTask(index)} key={`task${index}`}/>)}
 			</div>
 		);
-	}
+	
 }
 
 export default App;
