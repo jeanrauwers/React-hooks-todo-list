@@ -1,17 +1,13 @@
-import React  from 'react';
-import '../CSS/..'
-const Note = props => {
-	const {item, ...restProps} = props
+import React from "react";
 
-	return (
-		<div 
-		{...restProps}
-			className="note"
-			
-		>
-			{item || ''}
-		</div>
-	);
+const Note = props => {
+  const { item, ...restProps } = props;
+
+  return (
+    <div {...restProps} className="note">
+      {item || ""}
+    </div>
+  );
 };
 
 export default Note;
