@@ -6,7 +6,7 @@
     "acorn": "^7.1.1",
     "kind-of": "^6.0.3",
     "minimist": "^1.2.5",
-    "node-sass": "^4.14.0",
+    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
